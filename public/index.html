@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/api/products" method="POST">
+        <input type="text" name="name" placeholder="name" />
+        <input type="text" name="description" placeholder="description" />
+        <input type="text" name="code" placeholder="code" />
+        <input type="text" name="image" placeholder="url image" />
+        <input type="text" name="price" placeholder="price" />
+        <input type="text" name="stock" placeholder="stock" />
+        <input type="submit" value="send" />
+
+    </form>
+<h1>CREAR CARRITO</h1>
+    <form action="/api/carrito" method="POST">        
+        <input type="submit" value="CREAR CARRITO" />
+
+    </form>
+
+<h1>CARGAR PRODUCTO A CARRITO</h1>
+
+<form action="/api/carrito/1/products" method="POST">
+    <input type="text" name="name" placeholder="name" />
+    <input type="text" name="description" placeholder="description" />
+    <input type="text" name="code" placeholder="code" />
+    <input type="text" name="image" placeholder="url image" />
+    <input type="text" name="price" placeholder="price" />
+    <input type="text" name="stock" placeholder="stock" />
+    <input type="submit" value="send" />
+
+</form>
+
+
+
+</body>
+
+</html>
