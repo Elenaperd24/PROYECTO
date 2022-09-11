@@ -1,4 +1,6 @@
 const { promises: fs } = require('fs');
+const { isReadable } = require('stream');
+const ApiProducts = require('./ApiProducts')
 
 // AQUI COMIENZA MI CLASE CONTENEDOR 
 
@@ -7,28 +9,29 @@ class Carrito {
         this.nameFile = nameFile // recibo el nombre del archivo
         //creo el archivo
         this.carritos = []
+        this.apiProducts = new ApiProducts('products.txt')
     }
 
     async createCarrito() {
         try {
 
-            const contenido = await this.getAll() // leo el contenido
+            const carritos = await this.getAll() // leo el carritos
             let newId
 
-            if (contenido.length == 0) {
+            if (carritos.length == 0) {
                 newId = 1 // id si no hay elememtos en el archivo
             }
             else {
-                newId = contenido.length + 1 // me aseguro de no duplicar el id
+                newId = carritos.length + 1 // me aseguro de no duplicar el id
             }
             let newCarrito = []
             const date = new Date()
 
-            contenido.push({ ...newCarrito, id: newId, timestamp: date, products: [] }) // agrego al archivo el producto
+            carritos.push({ ...newCarrito, id: newId, timestamp: date, products: [] }) // agrego al archivo el producto
 
 
             // sobre escribo el archivo
-            await fs.writeFile(`./${this.nameFile}`, JSON.stringify(contenido, null, 2))
+            await fs.writeFile(`./${this.nameFile}`, JSON.stringify(carritos, null, 2))
             return newId
 
         }
@@ -39,13 +42,13 @@ class Carrito {
 
     async getById(id) {
 
-        const contenido = await this.getAll() // leo el contenido
+        const carritos = await this.getAll() // leo el carritos
 
         // filtro el objeto con id selec
-        let newContenido = contenido.filter(item => item.id == id)
+        let newcarritos = carritos.filter(item => item.id == id)
 
-        if (newContenido[0] !== null) {
-            return newContenido[0] // Retorno el resultado con el objeto del ID
+        if (newcarritos[0] !== null) {
+            return newcarritos[0] // Retorno el resultado con el objeto del ID
         }
         else {
             return null;
@@ -53,30 +56,26 @@ class Carrito {
 
     }
 
-    async postData(id, product) {
-
+    async postData(id, idproduct) {
         try {
-            const contenido = await this.getAll() // leo el contenido
-            let carrito = await this.getById(id)
 
-            if (carrito !== null) {   
+            const carrito = await this.getById(id)
+            const productAdd = await this.apiProducts.getById(idproduct)
+            const carritos = await this.getAll()
 
-                contenido.map(item => {                    
-                    if (item.id == id) {
-                        const date = new Date()
-                        product.timestamp = date
-                        item.products.push(product)
+            if (carrito !== null) {
+
+                carritos.map(item => {
+                    if (item.id == id && productAdd !== undefined) {
+                        item.products.push(productAdd)
                     }
                 })
             }
             else {
-                return null // me aseguro de no duplicar el id
-            }          
-
+                return null // me aseguro de no duplicar el id            
+            }
             // sobre escribo el archivo
-            await fs.writeFile(`./${this.nameFile}`, JSON.stringify(contenido, null, 2))
-            return newId
-
+            await fs.writeFile(`./${this.nameFile}`, JSON.stringify(carritos, null, 2))
         }
         catch (err) {
             throw new Error('save error', err)
@@ -86,9 +85,9 @@ class Carrito {
 
     async getAll() {
         try {
-            // leo el contenido del archivo
-            const contenido = await fs.readFile(`./${this.nameFile}`, 'utf-8')
-            return JSON.parse(contenido) // retorno un array con todos los productos
+            // leo el carritos del archivo
+            const carritos = await fs.readFile(`./${this.nameFile}`, 'utf-8')
+            return JSON.parse(carritos) // retorno un array con todos los productos
         }
         catch (err) {
             return []
@@ -98,15 +97,15 @@ class Carrito {
 
     async deleteById(id) {
 
-        const contenido = await this.getAll()
+        const carritos = await this.getAll()
 
         let objectDelete = await this.getById(id)
 
-        let newContenido = contenido.filter(item => item.id !== objectDelete.id)
+        let newcarritos = carritos.filter(item => item.id !== objectDelete.id)
 
         try {
-            if (newContenido !== null) {
-                await fs.writeFile(`./${this.nameFile}`, JSON.stringify(newContenido, null, 2))
+            if (newcarritos !== null) {
+                await fs.writeFile(`./${this.nameFile}`, JSON.stringify(newcarritos, null, 2))
             }
 
         } catch (error) {
@@ -115,8 +114,33 @@ class Carrito {
 
     }
 
-    deleteAll() {
-        fs.unlink(`./${this.nameFile}`)
+    async deleteIdProdIdCart(id, id_prod) {
+        try {
+            const carrito = await this.getById(id)
+            const carritos = await this.getAll()
+
+            if (carrito !== null) {
+
+                carritos.map(item => {
+                    if (item.id == id) {
+                        const newProducts = item.products.filter(product => {
+                            product.id !== id_prod
+                        })
+                        item.products = newProducts
+                        console.log(newProducts)
+                    }
+                })
+                // sobre escribo el archivo
+                 await fs.writeFile(`./${this.nameFile}`, JSON.stringify(carritos, null, 2))
+                return carritos
+            }
+
+
+        }
+
+        catch {
+            throw new Error('error deleteIdCartProdId', err)
+        }
     }
 }
 

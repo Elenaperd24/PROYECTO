@@ -93,6 +93,7 @@ class Products {
         try {
             if (newContenido !== null) {
                 await fs.writeFile(`./${this.nameFile}`, JSON.stringify(newContenido, null, 2))
+                return contenido
             }
 
         } catch (error) {
