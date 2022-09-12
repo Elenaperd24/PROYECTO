@@ -13,6 +13,7 @@ class Products {
         const contenido = await this.getAll() // leo el contenido
         let newId
 
+
         if (contenido.length == 0) {
             newId = 1 // id si no hay elememtos en el archivo
         }

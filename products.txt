@@ -1,0 +1,12 @@
+[
+  {
+    "name": "New Elena2",
+    "description": "Manga larga ",
+    "code": "111111",
+    "image": "https://static.dafiti.com.ar/p/legacy-1603-224288-1-product.jpg",
+    "price": "500",
+    "stock": "7",
+    "id": 2,
+    "timestamp": "2022-09-12T16:15:50.811Z"
+  }
+]

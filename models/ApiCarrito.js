@@ -7,7 +7,7 @@ class Carrito {
     constructor(nameFile) {
         this.nameFile = nameFile // recibo el nombre del archivo
         //creo el archivo
-        this.carritos = []
+       this.carritos = []
         this.apiProducts = new ApiProducts('products.txt')
     }
 
@@ -16,7 +16,7 @@ class Carrito {
 
             const carritos = await this.getAll() // leo el carritos
             let newId
-
+            console.log(carritos)
             if (carritos.length == 0) {
                 newId = 1 // id si no hay elememtos en el archivo
             }

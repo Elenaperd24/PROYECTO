@@ -1,16 +1,16 @@
 const express = require("express")
 const { Router } = express
-const Apiproducts = require('../models/ApiProducts')
+const ApiCarritos = require('../models/ApiCarrito')
 
-const carritos = new Apiproducts('carritos.txt')
+const carritos = new ApiCarritos('carritos.txt')
 
 const routCarrito = Router()
 
 
 routCarrito.post('/', async (req, res) => {
     //crea un carrito y devuleve su id
-    const idCart = await carritos.createCarrito()
-    console.log(idCart)
+    await carritos.createCarrito()
+    
     res.json('carrito creado')
 })
 
@@ -33,6 +33,7 @@ routCarrito.post('/:id/products', async (req, res) => {
     const idproduct = req.body.id
     const productAdd =  await carritos.postData(id, idproduct)
     res.json(productAdd) 
+    //AGREGA PRODUCTO POR UN ID DE CARRITO
 })
 
 routCarrito.delete('/:id/products/:id_prod', async (req, res) => {
