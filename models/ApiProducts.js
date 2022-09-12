@@ -72,7 +72,7 @@ class Products {
                     item.description = product.description?product.description:item.description,
                     item.code = product.code?product.code:item.code,
                     item.image = product.image?product.image:item.image,
-                    item.price = product.price?product.image:item.price,
+                    item.price = product.price?product.price:item.price,
                     item.stock = product.stock?product.stock:item.stock,
                     item.timestamp = product.timestamp?product.timestamp:item.timestamp
             }
