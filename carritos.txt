@@ -18,6 +18,27 @@
   {
     "id": 2,
     "timestamp": "2022-09-11T03:16:09.633Z",
-    "products": []
+    "products": [
+      {
+        "name": "New Elena2",
+        "description": "Manga larga ",
+        "code": "111111",
+        "image": "https://static.dafiti.com.ar/p/legacy-1603-224288-1-product.jpg",
+        "price": "500",
+        "stock": "7",
+        "timestamp": "2022-09-11T02:04:58.438Z",
+        "id": 1
+      },
+      {
+        "name": "New Elena3",
+        "description": "Manga larga ",
+        "code": "111111",
+        "image": "https://static.dafiti.com.ar/p/legacy-1603-224288-1-product.jpg",
+        "price": "500",
+        "stock": "7",
+        "timestamp": "2022-09-11T03:07:15.992Z",
+        "id": 2
+      }
+    ]
   }
 ]
