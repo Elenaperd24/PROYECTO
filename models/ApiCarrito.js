@@ -106,6 +106,7 @@ class Carrito {
             if (newcarritos !== null) {
                 await fs.writeFile(`./${this.nameFile}`, JSON.stringify(newcarritos, null, 2))
             }
+        
 
         } catch (error) {
             throw new Error('deleteById error', err)
@@ -126,7 +127,6 @@ class Carrito {
                             product.id !== id_prod
                         })
                         item.products = newProducts
-                        console.log(newProducts)
                     }
                 })
                 // sobre escribo el archivo
