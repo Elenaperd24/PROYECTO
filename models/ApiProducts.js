@@ -20,8 +20,8 @@ class Products {
             newId = contenido.length + 1 // me aseguro de no duplicar el id
         }
         const date = new Date()
-           
-        contenido.push({ ...product, id: newId ,timestamp: date}) // agrego al archivo el producto
+
+        contenido.push({ ...product, id: newId, timestamp: date }) // agrego al archivo el producto
 
         try {
             // sobre escribo el archivo
@@ -64,20 +64,21 @@ class Products {
 
     async putData(id, product) {
         // leo el contenido del archivo
-        const contenido = await fs.readFile(`./${this.nameFile}`, 'utf-8')
+        const contenido = await this.getAll()
 
         contenido.map(item => {
             if (item.id == id) {
-                item.name = product.name,
-                item.description = product.description,
-                item.code = product.code,
-                item.image = product.image,
-                item.price = product.price,
-                item.stock = product.stock,
-                item.timestamp = product.timestamp
+                    item.name=product.name?product.name:item.name,
+                    item.description = product.description?product.description:item.description,
+                    item.code = product.code?product.code:item.code,
+                    item.image = product.image?product.image:item.image,
+                    item.price = product.price?product.image:item.image,
+                    item.stock = product.stock?product.stock:item.stock,
+                    item.timestamp = product.timestamp?product.timestamp:item.timestamp
             }
         })
-
+        // sobre escribo el archivo
+        await fs.writeFile(`./${this.nameFile}`, JSON.stringify(contenido, null, 2))
         return contenido
 
     }
