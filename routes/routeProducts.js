@@ -18,11 +18,11 @@ routProducts.get('/:id?', async (req, res) => {
 
     if (id !== undefined) {
         const product = await products.getById(id)
-        product ? res.send(product) : res.send({ error: "products doesn't exist" })
+        product ? res.send(product) : res.send({ error: "products doesn't exist"})
     }
     else {
         const allproducts = await products.getAll()
-        res.send(allproducts)
+        res.json(allproducts)
     }
     //si existe el id busco el producto de ese id sino muestro tods
 })
@@ -30,14 +30,14 @@ routProducts.get('/:id?', async (req, res) => {
 routProducts.post('/', auth ,async (req, res) => {
     const product = req.body
     await products.postData(product)
-    res.send("creado el prod")//puedo incorporar productos a la base de datos productos
+    res.json("creado el prod")//puedo incorporar productos a la base de datos productos
 })
 
 routProducts.put('/:id', auth, async (req, res) => {
     const product = req.body
     const id = req.params.id
     const editado = await products.putData(id, product)
-    res.send('entre a put') //actualiza producto segun su id
+    res.json('entre a put') //actualiza producto segun su id
 })
 
 routProducts.delete('/:id', auth,async (req, res) => {
