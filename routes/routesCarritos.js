@@ -1,6 +1,6 @@
 const express = require("express")
 const { Router } = express
-const Apiproducts = require('../ApiCarrito')
+const Apiproducts = require('../models/ApiProducts')
 
 const carritos = new Apiproducts('carritos.txt')
 

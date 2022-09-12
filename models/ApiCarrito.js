@@ -1,5 +1,4 @@
 const { promises: fs } = require('fs');
-const { isReadable } = require('stream');
 const ApiProducts = require('./ApiProducts')
 
 // AQUI COMIENZA MI CLASE CONTENEDOR 

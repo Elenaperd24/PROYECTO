@@ -1,6 +1,6 @@
 const express = require("express")
 const { Router } = express
-const Apiproducts = require('../ApiProducts')
+const Apiproducts = require('../models/ApiProducts')
 const {auth} = require('../midelword/auth')
 
 //const app = express()
