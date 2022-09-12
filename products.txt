@@ -6,7 +6,7 @@
     "image": "https://static.dafiti.com.ar/p/legacy-1603-224288-1-product.jpg",
     "price": "https://static.dafiti.com.ar/p/legacy-1603-224288-1-product.jpg",
     "stock": "7",
-    "id": 2,
+    "id": 1,
     "timestamp": "2022-09-12T12:24:51.985Z"
   }
 ]
