@@ -16,7 +16,7 @@ class Carrito {
 
             const carritos = await this.getAll() // leo el carritos
             let newId
-            console.log(carritos)
+           
             if (carritos.length == 0) {
                 newId = 1 // id si no hay elememtos en el archivo
             }
